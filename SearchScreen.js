@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, FlatList, Image } from "react-native";
 import { getSearchedBooks } from "./api";
 import { BookItem } from "./BookItem";
@@ -10,28 +10,43 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export const SearchScreen = () => {
   const navigation = useNavigation();
+  const [searchedBooks, setSearchedBooks] = useState([]);
   const [input, setInput] = useState("");
-  const [filteredData, setFilteredData] = useState([]);
+
   const onTextChange = (input) => {
     setInput(input);
 
     if (!input) {
-      setFilteredData([]);
+      setSearchedBooks([]);
       return;
     }
-    setFilteredData(getSearchedBooks(input));
+    getFetchedSearchedBooks(input);
   };
+
+  const getFetchedSearchedBooks = async (input) => {
+    const bookFetchResult = await getSearchedBooks(input);
+    setSearchedBooks(bookFetchResult);
+  };
+
   const onPress = (title) => {
     navigation.navigate(Routes.BookDetailsScreen, { title });
   };
+
+  if (!searchedBooks) {
+    return (
+      <View>
+        <Text> bookdetails placeholder </Text>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.container}>
       <SearchBar style={styles.searchBar} onTextChange={onTextChange} />
       {!!input ? (
         <FlatList
-          contentContainerStyle={{ flex: 1 }}
-          data={filteredData}
+          contentContainerStyle={{ flex: searchedBooks.length ? undefined : 1 }}
+          data={searchedBooks}
           ListEmptyComponent={
             <View style={styles.searchPlaceholer}>
               <MaterialCommunityIcons

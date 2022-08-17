@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useRoute } from "@react-navigation/native";
 import {
   StyleSheet,
@@ -15,9 +15,21 @@ import { Strings } from "./Strings";
 import { BuyLinks } from "./BookBuyLinks";
 
 export const BookDetails = () => {
+  const [bookDetails, setBookDetails] = useState(null);
   const [modalVisible, setModalVisible] = useState(false);
   const route = useRoute();
+
   const { title: name } = route.params;
+
+  const getFetchedBookDetails = async (name) => {
+    const bookFetchResult = await getBookByName(name);
+    setBookDetails(bookFetchResult);
+  };
+
+  useEffect(() => {
+    getFetchedBookDetails(name);
+  }, []);
+
   const onURLPress = (url) => {
     Linking.openURL(url);
   };
@@ -26,18 +38,15 @@ export const BookDetails = () => {
     setModalVisible(false);
   };
 
-  const {
-    author,
-    publisher,
-    title,
-    description,
-    primary_isbn10,
-    primary_isbn13,
-    price,
-    book_image,
-    rank,
-    buy_links,
-  } = getBookByName(name);
+  if (!bookDetails) {
+    return (
+      <View>
+        <Text> bookdetails placeholder </Text>
+      </View>
+    );
+  }
+
+  const { author, title, description, book_image, buy_links } = bookDetails;
 
   return (
     <View style={styles.container}>

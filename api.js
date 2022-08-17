@@ -1,36 +1,51 @@
-import { bestSellers } from "./Books";
-
-export const getBestSellers = () => {
+export const getBestSellers = async () => {
   const parsedLists = [];
 
-  bestSellers.results.lists.forEach((list) => {
+  const resp = await fetch(
+    "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=DWBqhRsvR2qyt8O3T6PlvsOl2lqO0hTu"
+  );
+  const data = await resp.json();
+
+  data.results.lists.forEach((list) => {
     parsedLists.push({
       title: list.list_name,
       data: list.books,
     });
   });
+
   return parsedLists;
 };
 
-export const getBookByName = (name) => {
+export const getBookByName = async (name) => {
   let foundBook;
 
-  bestSellers.results.lists.forEach((list) => {
+  const resp = await fetch(
+    "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=DWBqhRsvR2qyt8O3T6PlvsOl2lqO0hTu"
+  );
+  const data = await resp.json();
+
+  data.results.lists.forEach((list) => {
     list.books.forEach((book) => {
       if (book.title === name) foundBook = book;
     });
   });
+
   return foundBook;
 };
 
-export const getSearchedBooks = input => {
-  let searchResults = []
+export const getSearchedBooks = async (input) => {
+  let searchResults = [];
 
-  bestSellers.results.lists.forEach(list => {
+  const resp =  await fetch(
+    "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=DWBqhRsvR2qyt8O3T6PlvsOl2lqO0hTu"
+  );
+  const data = await resp.json();
+
+  data.results.lists.forEach((list) => {
     searchResults = [...searchResults, ...list.books];
-  })
+  });
 
-  return searchResults.filter(book => {
-    return book.title.toLowerCase().indexOf(input.toLowerCase()) > -1
+  return searchResults.filter((book) => {
+    return book.title.toLowerCase().indexOf(input.toLowerCase()) > -1;
   });
 };

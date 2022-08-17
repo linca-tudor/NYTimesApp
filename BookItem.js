@@ -61,6 +61,7 @@ export const styles = StyleSheet.create({
     borderRadius: 4,
   },
   container: {
+    flex: 1,
     flexDirection: "row",
     paddingLeft: 20,
     shadowColor: Colors.ceruleanBlue,
