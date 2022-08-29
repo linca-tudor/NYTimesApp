@@ -12,7 +12,6 @@ import * as SplashScreen from "expo-splash-screen";
 import useFonts from "./hooks/useFonts";
 import { Feather } from "@expo/vector-icons";
 import { SearchScreen } from "./SearchScreen";
-import { fetchBestSellers } from "./api.js";
 
 // Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();

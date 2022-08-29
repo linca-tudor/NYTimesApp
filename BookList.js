@@ -12,6 +12,7 @@ import { getBestSellers } from "./api";
 import { Routes } from "./Routes";
 import { BookItem } from "./BookItem";
 import { Colors } from "./GraphicDesign";
+import LottieView from "lottie-react-native";
 
 export const BookListScreen = () => {
   const [bestSellers, setBestSellers] = useState(null);
@@ -53,7 +54,7 @@ export const BookListScreen = () => {
     );
   };
   return (
-    <SafeAreaView>
+    <SafeAreaView style={styles.container}>
       {bestSellers ? (
         <SectionList
           sections={bestSellers}
@@ -70,7 +71,12 @@ export const BookListScreen = () => {
           stickySectionHeadersEnabled={false}
         />
       ) : (
-        <Text>loader</Text>
+        <LottieView
+          autoPlay
+          loop
+          style={styles.loadingAnimation}
+          source={require("./assets/animations/loading-book.json")}
+        />
       )}
     </SafeAreaView>
   );
@@ -92,5 +98,19 @@ export const styles = StyleSheet.create({
     shadowOffset: { height: 5, width: 5 },
     shadowRadius: 10,
     shadowOpacity: 0.4,
+  },
+  container: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  loadingPlaceholder: {
+    flex: 1,
+    alignSelf: "center",
+  },
+  loadingAnimation: {
+    width: 200,
+    height: 200,
+    color: Colors.bleuDeFrance,
   },
 });

@@ -13,6 +13,7 @@ import { getBookByName } from "./api";
 import { Colors, Fonts } from "./GraphicDesign";
 import { Strings } from "./Strings";
 import { BuyLinks } from "./BookBuyLinks";
+import LottieView from "lottie-react-native";
 
 export const BookDetails = () => {
   const [bookDetails, setBookDetails] = useState(null);
@@ -40,8 +41,13 @@ export const BookDetails = () => {
 
   if (!bookDetails) {
     return (
-      <View>
-        <Text> bookdetails placeholder </Text>
+      <View style={styles.loadingPlaceholder}>
+        <LottieView
+          autoPlay
+          loop
+          style={styles.loadingAnimation}
+          source={require("./assets/animations/loading-book.json")}
+        />
       </View>
     );
   }
@@ -166,5 +172,15 @@ export const styles = StyleSheet.create({
     fontFamily: Fonts.openSansMedium,
     color: Colors.white,
     fontSize: 16,
+  },
+  loadingPlaceholder: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  loadingAnimation: {
+    width: 200,
+    height: 200,
+    color: Colors.bleuDeFrance,
   },
 });
