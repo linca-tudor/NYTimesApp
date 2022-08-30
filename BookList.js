@@ -111,6 +111,5 @@ export const styles = StyleSheet.create({
   loadingAnimation: {
     width: 200,
     height: 200,
-    color: Colors.bleuDeFrance,
   },
 });

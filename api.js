@@ -36,16 +36,19 @@ export const getBookByName = async (name) => {
 export const getSearchedBooks = async (input) => {
   let searchResults = [];
 
-  const resp =  await fetch(
+  const resp = await fetch(
     "https://api.nytimes.com/svc/books/v3/lists/full-overview.json?api-key=DWBqhRsvR2qyt8O3T6PlvsOl2lqO0hTu"
   );
-  const data = await resp.json();
+  if (resp.ok) {
+    const data = await resp.json();
+    data.results.lists.forEach((list) => {
+      searchResults = [...searchResults, ...list.books];
+    });
 
-  data.results.lists.forEach((list) => {
-    searchResults = [...searchResults, ...list.books];
-  });
-
-  return searchResults.filter((book) => {
-    return book.title.toLowerCase().indexOf(input.toLowerCase()) > -1;
-  });
+    return searchResults.filter((book) => {
+      return book.title.toLowerCase().indexOf(input.toLowerCase()) > -1;
+    });
+  } else {
+    return 429;
+  }
 };
