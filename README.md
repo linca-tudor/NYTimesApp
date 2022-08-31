@@ -155,7 +155,7 @@ const Stack = createStackNavigator();
   
   | Homepage Loading Animation | Element Loading Animation | Search Bar Interaction |
   | :------------------------: | :-----------------------: | :--------------------: |
-  | <img style="display: block; margin-left: auto; margin-right: auto; width: 275" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingBooklist.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 275" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingAnimation.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 275" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/SearchBarCloseButton.gif"/> |
+  | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingBooklist.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/LoadingAnimation.gif"/> | <img style="display: block; margin-left: auto; margin-right: auto; width: 250" src="https://github.com/linca-tudor/NYTimesApp/blob/master/assets/gifs/SearchBarCloseButton.gif"/> |
   
 ## Further improvements
   
